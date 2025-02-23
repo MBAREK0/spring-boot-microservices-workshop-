@@ -10,10 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
+    private final OrderServiceClient orderServiceClient;
+
+    public UserController(OrderServiceClient orderServiceClient) {
+        this.orderServiceClient = orderServiceClient;
+    }
+
     @GetMapping("/{userId}")
     public ResponseEntity<String> getUserDetails(@PathVariable String userId) {
-        // Simulate fetching user details
+
         String userDetails = "User " + userId + " details";
-        return ResponseEntity.ok(userDetails);
+        String order =   orderServiceClient.getOrderDetails(userId).getBody();
+        return ResponseEntity.ok(userDetails + "\n" + order);
     }
 }

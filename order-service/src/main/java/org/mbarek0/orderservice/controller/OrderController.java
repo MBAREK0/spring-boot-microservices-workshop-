@@ -14,19 +14,10 @@ import org.springframework.web.client.RestTemplate;
 public class OrderController {
 
 
-    private final RestTemplate restTemplate;
-
-    @Autowired
-    public OrderController(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
 
     @GetMapping("/{userId}")
     public ResponseEntity<String> getOrderDetails(@PathVariable String userId) {
-        // Fetch user details from User Service
-//        String userDetails = restTemplate.getForObject(
-//                "http://localhost:8083/users/{userId}", String.class, userId);
 
-        return ResponseEntity.ok("Order details for user: " + "ee");
+        return ResponseEntity.ok("Order details for user: " + userId);
     }
 }
